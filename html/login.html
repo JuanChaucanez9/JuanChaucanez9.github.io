@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="../css/loader.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/login.css">
+
+</head>
+<body>
+    <div id="loader" class="loader"></div>
+    <div id="content" style="display: none;">
+    
+    <header class="header">
+        <img class="target-image" src="../img/cain.png" alt="Imagen objetivo" data-color-class="color-red">
+        <h2 class="titulo">Iniciar sesión</h2>
+        <img class="target-image" src="../img/bobble.png" alt="Imagen objetivo" data-color-class="color-red">
+        <div class="seciones">
+        </div>
+    </header>
+    <div class="botones">
+        <a href="Circo.html">circo</a>
+        <a href="mundoCaramelo.html">mundo caramelo</a>
+        <a href="#">mansion del terror</a>
+        <a href="#">restaurante</a>
+    </div>
+    <div class="login-cointainer">
+        <img src="../img/cainlogin.png" alt="Imagen invertida">
+        
+        <div id="error-message" class="error-message" style="display: none;"></div>
+        
+        <form id="login-form" class="login-form">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" required>
+            <label for="password">Contraseña</label>
+            <input type="password" name="password" id="password" required>
+            <button type="submit">Iniciar Sesión</button>
+            <a href="register.html">crear cuenta</a>
+        </form>
+    </div>
+    <script src="../js/loader.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

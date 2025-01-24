@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital circus</title>
+    <link rel="stylesheet" href="../css/circo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/loader.css">
+</head>
+
+<body>
+    <div id="loader" class="loader"></div>
+    <div id="content" style="display: none;">
+        <header class="header">
+            <img class="target-image" src="../img/cain.png" alt="Imagen objetivo" data-color-class="color-red">
+            <h2 class="titulo">Bienvenido al Circo digital</h2>
+            <img class="target-image" src="../img/bobble.png" alt="Imagen objetivo" data-color-class="color-red">
+            <div class="seciones" id="seciones">
+                <!-- Contenido dinámico basado en el estado de la sesión -->
+            </div>
+        </header>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                fetch('../php/check_session.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        const seciones = document.getElementById('seciones');
+                        if (data.loggedIn) {
+                            seciones.innerHTML = `
+                            <a href="../php/logout.php" class="boton">Cerrar sesión</a>
+                            <a href="perfil.html" class="boton">Perfil</a>
+                        `;
+                        } else {
+                            seciones.innerHTML = `
+                            <a href="login.html" class="boton">Iniciar sesión</a>
+                            <a href="register.html" class="boton">Registrarse</a>
+                        `;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            });
+        </script>
+        <div class="botones">
+            <a href="Circo.html">circo</a>
+            <a href="mundoCaramelo.html">mundo caramelo</a>
+            <a href="#">mansion del terror</a>
+            <a href="#">restaurante</a>
+        </div>
+        <div class="pomni">
+            <div class="presentacion">
+                <h1>Pomni</h1>
+                <img class="target-image zoom" src="../img/pomni.png" alt="Imagen objetivo">
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
+                necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic
+                quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
+        </div>
+        <div class="raghata">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
+                necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic
+                quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
+            <div class="presentacion">
+                <h1>ragatha</h1>
+                <img class="target-image zoom" src="../img/ragatha.png" alt="Imagen objetivo">
+            </div>
+        </div>
+        <div class="jax">
+            <div class="presentacion">
+                <h1>Jax</h1>
+                <img class="target-image zoom" src="../img/jax.png" alt="Imagen objetivo">
+            </div>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
+                necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic
+                quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
+        </div>
+
+    </div>
+    <script src="../js/loader.js"></script>
+    <script src="../js/circo.js"></script>
+</body>
+
+</html>

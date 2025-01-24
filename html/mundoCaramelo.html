@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Mcaramelo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="../css/loader.css">
+    <title>Mundo caramelo</title>
+</head>
+<body>
+    <div id="loader" class="loader"></div>
+    <div id="content" style="display: none;">
+    <header class="header">
+        <img class="target-image" src="../img/cain.png" alt="Imagen objetivo" data-color-class="color-red">
+        <h2 class="titulo">Bienvenido al Reino caramelo</h2>
+        <img class="target-image" src="../img/bobble.png" alt="Imagen objetivo" data-color-class="color-red">
+        <div class="seciones" id="seciones">
+            <!-- Contenido dinámico basado en el estado de la sesión -->
+        </div>
+    </header>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('../php/check_session.php')
+                .then(response => response.json())
+                .then(data => {
+                    const seciones = document.getElementById('seciones');
+                    if (data.loggedIn) {
+                        seciones.innerHTML = `
+                        <a href="../php/logout.php" class="boton">Cerrar sesión</a>
+                        <a href="perfil.html" class="boton">Perfil</a>
+                    `;
+                    } else {
+                        seciones.innerHTML = `
+                        <a href="login.html" class="boton">Iniciar sesión</a>
+                        <a href="register.html" class="boton">Registrarse</a>
+                    `;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+    <div class="botones">
+        <a href="Circo.html">circo</a>
+        <a href="mundoCaramelo.html">mundo caramelo</a>
+        <a href="#">mansion del terror</a>
+        <a href="#">restaurante</a>
+    </div>
+
+    <div class="Reina">
+        <div class="presentacion">
+            <h1>Reina Lu</h1>
+            <img class="target-image zoom" src="../img/reinadulce.png" alt="Imagen objetivo" >
+        </div>
+        <p class="pe">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
+    </div>
+    <div class="goomigo">
+        <p class="pe">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
+        <div class="presentacion">
+            <h1>googmigu</h1>
+            <img class="target-image zoom" src="../img/goomigo.png" alt="Imagen objetivo" >
+        </div>
+        
+    </div>
+    </div>
+    <script src="../js/loader.js"></script>
+    <script src="../js/Mcaramelo.js"></script>
+</body>
+</html>
