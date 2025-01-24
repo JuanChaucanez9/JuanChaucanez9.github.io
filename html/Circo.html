@@ -43,7 +43,10 @@
                             <a href="perfil.html" class="boton">Perfil</a>
                         `;
                     } else {
-                        seciones.innerHTML = '<p>Por favor, inicia sesión.</p>';
+                        seciones.innerHTML = `
+                            <a href="login.html" class="boton">Iniciar sesión</a>
+                            <a href="register.html" class="boton">Registrarse</a>
+                        `;
                     }
                     document.getElementById('loader').style.display = 'none';
                     document.getElementById('content').style.display = 'block';
