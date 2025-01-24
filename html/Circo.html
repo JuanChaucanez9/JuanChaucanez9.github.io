@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/circo.css">
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/loader.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.28.5/dist/umd/supabase.min.js"></script>
 </head>
 
 <body>
@@ -22,40 +23,34 @@
             </div>
         </header>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                // Simulación de una llamada a una API para verificar la sesión
-                const checkSession = () => {
-                    return new Promise((resolve) => {
-                        // Simula una respuesta de sesión
-                        setTimeout(() => {
-                            const loggedIn = localStorage.getItem('loggedIn') === 'true';
-                            const username = localStorage.getItem('username') || 'Usuario';
-                            resolve({ loggedIn, username });
-                        }, 1000);
-                    });
-                };
+            // Reemplaza estos valores con tus credenciales de Supabase
+            const supabaseUrl = 'https://wxilsdxcjhakdxnjhgtu.supabase.co';
+            const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4aWxzZHhjamhha2R4bmpoZ3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc2ODkzMzEsImV4cCI6MjA1MzI2NTMzMX0.k8GBWY0k5ZrE3FERX8KHjbn9lAe7yRK2rXiNmTsca18';
+            const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-                checkSession().then(data => {
-                    const seciones = document.getElementById('seciones');
-                    if (data.loggedIn) {
-                        seciones.innerHTML = `
-                            <a href="#" class="boton" onclick="logout()">Cerrar sesión</a>
-                            <a href="perfil.html" class="boton">Perfil</a>
-                        `;
-                    } else {
-                        seciones.innerHTML = `
-                            <a href="login.html" class="boton">Iniciar sesión</a>
-                            <a href="register.html" class="boton">Registrarse</a>
-                        `;
-                    }
-                    document.getElementById('loader').style.display = 'none';
-                    document.getElementById('content').style.display = 'block';
-                });
+            document.addEventListener('DOMContentLoaded', async function () {
+                const session = supabase.auth.session();
+                const seciones = document.getElementById('seciones');
+                if (session) {
+                    seciones.innerHTML = `
+                        <a href="#" class="boton" onclick="logout()">Cerrar sesión</a>
+                        <a href="perfil.html" class="boton">Perfil</a>
+                    `;
+                } else {
+                    seciones.innerHTML = `
+                        <a href="login.html" class="boton">Iniciar sesión</a>
+                        <a href="register.html" class="boton">Registrarse</a>
+                    `;
+                }
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
             });
 
             function logout() {
-                localStorage.setItem('loggedIn', 'false');
-                location.reload();
+                supabase.auth.signOut().then(() => {
+                    localStorage.setItem('loggedIn', 'false');
+                    location.reload();
+                });
             }
         </script>
         <div class="botones">
@@ -69,9 +64,6 @@
                 <h1>Pomni</h1>
                 <img class="target-image zoom" src="../img/pomni.png" alt="Imagen objetivo">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
-                necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic
-                quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
         </div>
         <div class="raghata">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
@@ -87,11 +79,7 @@
                 <h1>Jax</h1>
                 <img class="target-image zoom" src="../img/jax.png" alt="Imagen objetivo">
             </div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et dicta repudiandae accusamus voluptatem
-                necessitatibus, cupiditate vitae laboriosam dolore ipsam reiciendis vero voluptates pariatur hic
-                quibusdam recusandae temporibus. Consequuntur, corrupti voluptatibus.</p>
         </div>
-
     </div>
     <script src="../js/loader.js"></script>
     <script src="../js/circo.js"></script>

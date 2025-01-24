@@ -13,13 +13,13 @@
         <h2 class="titulo">Perfil de Usuario</h2>
     </header>
     <div class="contenido">
-        <p id="username"></p>
+        <p id="email"></p>
         <a href="#" class="boton" onclick="logout()">Cerrar sesión</a>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const username = localStorage.getItem('username') || 'Usuario';
-            document.getElementById('username').textContent = `Bienvenido, ${username}`;
+            const email = localStorage.getItem('email') || 'usuario@example.com';
+            document.getElementById('email').textContent = `Bienvenido, ${email}`;
         });
 
         function logout() {

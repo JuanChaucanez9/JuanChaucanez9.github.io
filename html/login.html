@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/loader.css">
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/login.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@1.28.5/dist/umd/supabase.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -23,22 +23,30 @@
         </form>
     </div>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function (event) {
+        // Reemplaza estos valores con tus credenciales de Supabase
+        const supabaseUrl = 'https://wxilsdxcjhakdxnjhgtu.supabase.co';
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind4aWxzZHhjamhha2R4bmpoZ3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc2ODkzMzEsImV4cCI6MjA1MzI2NTMzMX0.k8GBWY0k5ZrE3FERX8KHjbn9lAe7yRK2rXiNmTsca18';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        document.getElementById('loginForm').addEventListener('submit', async function (event) {
             event.preventDefault();
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Simulación de verificación de credenciales
-            if (email === 'usuario@example.com' && password === 'contraseña') {
+            // Autenticación con Supabase
+            const { user, error } = await supabase.auth.signIn({
+                email: email,
+                password: password
+            });
+
+            if (error) {
+                alert('Credenciales incorrectas');
+            } else {
                 localStorage.setItem('loggedIn', 'true');
                 localStorage.setItem('email', email);
                 location.href = 'Circo.html';
-            } else {
-                alert('Credenciales incorrectas');
             }
         });
     </script>
-    <script src="../js/loader.js"></script>
-    <script src="../js/login.js"></script>
 </body>
 </html>
