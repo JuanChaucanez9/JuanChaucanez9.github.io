@@ -23,26 +23,37 @@
         </header>
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                fetch('../php/check_session.php')
-                    .then(response => response.json())
-                    .then(data => {
-                        const seciones = document.getElementById('seciones');
-                        if (data.loggedIn) {
-                            seciones.innerHTML = `
-                            <a href="../php/logout.php" class="boton">Cerrar sesión</a>
+                // Simulación de una llamada a una API para verificar la sesión
+                const checkSession = () => {
+                    return new Promise((resolve) => {
+                        // Simula una respuesta de sesión
+                        setTimeout(() => {
+                            const loggedIn = localStorage.getItem('loggedIn') === 'true';
+                            const username = localStorage.getItem('username') || 'Usuario';
+                            resolve({ loggedIn, username });
+                        }, 1000);
+                    });
+                };
+
+                checkSession().then(data => {
+                    const seciones = document.getElementById('seciones');
+                    if (data.loggedIn) {
+                        seciones.innerHTML = `
+                            <a href="#" class="boton" onclick="logout()">Cerrar sesión</a>
                             <a href="perfil.html" class="boton">Perfil</a>
                         `;
-                        } else {
-                            seciones.innerHTML = `
-                            <a href="login.html" class="boton">Iniciar sesión</a>
-                            <a href="register.html" class="boton">Registrarse</a>
-                        `;
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    });
+                    } else {
+                        seciones.innerHTML = '<p>Por favor, inicia sesión.</p>';
+                    }
+                    document.getElementById('loader').style.display = 'none';
+                    document.getElementById('content').style.display = 'block';
+                });
             });
+
+            function logout() {
+                localStorage.setItem('loggedIn', 'false');
+                location.reload();
+            }
         </script>
         <div class="botones">
             <a href="Circo.html">circo</a>

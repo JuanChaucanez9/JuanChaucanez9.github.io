@@ -9,42 +9,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Creepster&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loader" class="loader"></div>
-    <div id="content" style="display: none;">
-        <header class="header">
-            <img class="target-image" src="../img/cain.png" alt="Imagen objetivo" data-color-class="color-red">
-            <h2 class="titulo">Perfil</h2>
-            <img class="target-image" src="../img/bobble.png" alt="Imagen objetivo" data-color-class="color-red">
-            <a href="../php/logout.php">Cerrar sesión</a>
-        </header>
-        <div class="botones">
-            <a href="Circo.html">circo</a>
-            <a href="mundoCaramelo.html">mundo caramelo</a>
-            <a href="#">mansion del terror</a>
-            <a href="#">restaurante</a>
-        </div>
-        <div class="perfil-container">
-            <h1>Bienvenido, <span id="usuario"></span></h1>
-            <img src="../img/cainpresentacion.png" alt="">
-            <div class="item">nombre</div>
-            <div class="item">sexo</div>
-            <div class="item">edad</div>
-        </div>
+    <header class="header">
+        <h2 class="titulo">Perfil de Usuario</h2>
+    </header>
+    <div class="contenido">
+        <p id="username"></p>
+        <a href="#" class="boton" onclick="logout()">Cerrar sesión</a>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            fetch('../php/check_session.php')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.loggedIn) {
-                        document.getElementById('usuario').textContent = data.usuario;
-                    } else {
-                        window.location.href = 'login.html';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
+            const username = localStorage.getItem('username') || 'Usuario';
+            document.getElementById('username').textContent = `Bienvenido, ${username}`;
         });
+
+        function logout() {
+            localStorage.setItem('loggedIn', 'false');
+            location.href = 'Circo.html';
+        }
     </script>
     <script src="../js/loader.js"></script>
 </body>
